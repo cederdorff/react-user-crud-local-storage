@@ -11,23 +11,30 @@ export default function UserDetailPage() {
     getUser(); // call the getUser function
 
     async function getUser() {
-      const response = await fetch(`https://react-user-crud-app-default-rtdb.firebaseio.com/users/${id}.json`);
+      const response = await fetch(
+        `https://react-user-crud-app-default-rtdb.firebaseio.com/users/${id}.json`
+      );
       const data = await response.json();
       setUser(data); // set the user state with the data from local storage
     }
   }, [id]); // <--- "[id]" VERY IMPORTANT!!!
 
   function showDeleteDialog() {
-    const shouldDelete = window.confirm(`Do you want to delete "${user.name}"?`);
+    const shouldDelete = window.confirm(
+      `Do you want to delete "${user.name}"?`
+    );
     if (shouldDelete) {
       deleteUser();
     }
   }
 
   async function deleteUser() {
-    const response = await fetch(`https://react-user-crud-app-default-rtdb.firebaseio.com/users/${id}.json`, {
-      method: "DELETE"
-    });
+    const response = await fetch(
+      `https://react-user-crud-app-default-rtdb.firebaseio.com/users/${id}.json`,
+      {
+        method: "DELETE"
+      }
+    );
     if (response.ok) {
       navigate("/"); // navigate to the home page
     }

@@ -8,25 +8,31 @@ export default function UpdatePage() {
   const [user, setUser] = useState({});
 
   useEffect(() => {
-    const data = localStorage.getItem("users");
-    const usersData = JSON.parse(data) || [];
-    setUser(usersData.find(user => user.id === id));
-  }, [id]); // <--- "[params.id]" VERY IMPORTANT!!!
+    getUser(); // call the getUser function
+
+    async function getUser() {
+      const response = await fetch(
+        `https://react-user-crud-app-default-rtdb.firebaseio.com/users/${id}.json`
+      );
+      const data = await response.json();
+      setUser(data); // set the user state with the data from firebase
+    }
+  }, [id]); // <--- "[id]" VERY IMPORTANT!!!
 
   async function updateUser(userToUpdate) {
-    const data = localStorage.getItem("users");
-    const usersData = JSON.parse(data) || [];
-    // map through the users
-    const updatedUsers = usersData.map(user => {
-      // if the user id is the same as the id from the params
-      if (user.id === id) {
-        return { ...user, ...userToUpdate }; // return the user with the updated data
+    const response = await fetch(
+      `https://react-user-crud-app-default-rtdb.firebaseio.com/users/${id}.json`,
+      {
+        method: "PUT",
+        body: JSON.stringify(userToUpdate)
       }
-      return user; // return the user without updating
-    });
-
-    localStorage.setItem("users", JSON.stringify(updatedUsers)); // save the users state to local storage
-    navigate(`/users/${id}`); // navigate to the user detail page
+    );
+    console.log(response);
+    if (response.ok) {
+      navigate(`/users/${id}`); // navigate to the user detail page
+    } else {
+      console.log("An error occurred while updating the user");
+    }
   }
 
   function handleCancel() {
