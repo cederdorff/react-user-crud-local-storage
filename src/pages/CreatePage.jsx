@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 
 export default function CreatePage() {
   const navigate = useNavigate();
@@ -38,10 +38,16 @@ export default function CreatePage() {
       <div className="container">
         <h1>Create New User</h1>
         <form onSubmit={createUser}>
-          <label htmlFor="">Name</label>
+          <label htmlFor="name">Name</label>
           <input id="name" type="text" value={name} placeholder="Type a name" onChange={e => setName(e.target.value)} />
           <label htmlFor="title">Title</label>
-          <input id="title" type="text" value={title} placeholder="Type a title" onChange={e => setTitle(e.target.value)} />
+          <input
+            id="title"
+            type="text"
+            value={title}
+            placeholder="Type a title"
+            onChange={e => setTitle(e.target.value)}
+          />
           <label htmlFor="mail">Mail</label>
           <input id="mail" type="mail" value={mail} placeholder="Type a mail" onChange={e => setMail(e.target.value)} />
           <label htmlFor="mail">Image URL</label>

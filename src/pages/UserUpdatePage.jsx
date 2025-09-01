@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router";
 
 export default function UpdatePage() {
   const params = useParams();
@@ -57,7 +57,13 @@ export default function UpdatePage() {
           <label htmlFor="">Name</label>
           <input id="name" type="text" value={name} placeholder="Type a name" onChange={e => setName(e.target.value)} />
           <label htmlFor="title">Title</label>
-          <input id="title" type="text" value={title} placeholder="Type a title" onChange={e => setTitle(e.target.value)} />
+          <input
+            id="title"
+            type="text"
+            value={title}
+            placeholder="Type a title"
+            onChange={e => setTitle(e.target.value)}
+          />
           <label htmlFor="mail">Mail</label>
           <input id="mail" type="mail" value={mail} placeholder="Type a mail" onChange={e => setMail(e.target.value)} />
           <label htmlFor="mail">Image URL</label>
