@@ -50,8 +50,14 @@ export default function CreatePage() {
           />
           <label htmlFor="mail">Mail</label>
           <input id="mail" type="mail" value={mail} placeholder="Type a mail" onChange={e => setMail(e.target.value)} />
-          <label htmlFor="mail">Image URL</label>
-          <input type="url" value={image} placeholder="Paste image url" onChange={e => setImage(e.target.value)} />
+          <label htmlFor="url">Image URL</label>
+          <input
+            id="url"
+            type="url"
+            value={image}
+            placeholder="Paste image url"
+            onChange={e => setImage(e.target.value)}
+          />
           <label htmlFor="image-preview"></label>
           <img
             id="image-preview"
